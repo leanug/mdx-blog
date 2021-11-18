@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import Categories from '../components/Categories'
 import GlobalStyles from './GlobalStyles'
 import BackToTopBtn from './BackToTopBtn'
 import Footer from './Footer'
+import Newsletter from '../components/Newsletter'
 import Header from './Header'
 import { lightTheme, darkTheme } from '../theme';
 import PropTypes from "prop-types"
@@ -51,7 +53,14 @@ const Layout = ({ children, location: { pathname } }) => {
       <PageWrapper>
         <Header toggleTheme={ toggleTheme } pathname={ pathname } />
         <main>
-          { children }
+          <aside>
+            <Newsletter />
+            <br />
+            <Categories />
+          </aside>
+          <article>
+            { children }
+          </article>
         </main>
         <Footer />
       </PageWrapper>
@@ -64,6 +73,14 @@ const PageWrapper = styled.div`
   grid-template-columns: 1fr minmax(1fr, 70rem) 1fr;
   grid-template-rows: auto 1fr auto;
   min-height: 100vh;
+
+  main {
+    display: grid;
+    grid-template-columns: 30rem 80rem;
+    grid-gap: 8rem;
+    margin: auto;
+    max-width: var(--max-width);
+  }
 `
 
 Layout.propTypes = {

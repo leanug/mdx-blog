@@ -3,9 +3,9 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import styled from 'styled-components'
 import { Link } from 'gatsby'
 
-const Item = ({ categories, title, excerpt, image, slug, date }) => {
+const Item = ({ date, excerpt, humanDate, image, slug, title }) => {
     const img = getImage( image )
-    console.log(date);
+    
     return (
         <Wrapper>
             <Link to={ `/${slug}` }>
@@ -20,14 +20,10 @@ const Item = ({ categories, title, excerpt, image, slug, date }) => {
                     </div>
                 }
                 <div className="container">
-                    <div className="head">
-                        <div className="circle"></div>
-                        <span>
-                            Updated: <time dateTime="2017-02-14">{ date }</time>
-                        </span>
-                    </div>
+                    <span>Updated: <time dateTime={ date }>{ humanDate }</time></span>
                     <h2>{ title }</h2>
-                    <p>{ excerpt }</p><span className="read-more">Continue Reading</span>
+                    <p>{ excerpt }</p>
+                    <span className="read-more">Continue Reading</span>
                 </div>
             </Link>
         </Wrapper>
@@ -53,22 +49,6 @@ const Wrapper = styled.article`
         margin-bottom: 4rem;
     }
 
-    .head {
-        align-items: center;
-        color: var(--clr-beta);
-        display: flex;
-        margin-bottom: .4rem;
-    }
-
-    .circle {
-        background-color: var(--clr-alpha);
-        border-radius: 50%;
-        height: .8rem;
-        margin-bottom: .3rem;
-        margin-right: 1rem;
-        width: .8rem;
-    }
-
     .category {
         text-transform: capitalize;
         margin-right: 2rem;
@@ -91,6 +71,8 @@ const Wrapper = styled.article`
 
     .read-more {
         color: var(--clr-alpha);
+        display: block;
+        margin-top: 1rem;
     }
 `
   

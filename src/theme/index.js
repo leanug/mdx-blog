@@ -5,7 +5,7 @@ export const lightTheme = {
     gamma:      '#F6F6F6',
     delta:      '#EB0000',
     epsilon:    '#F286B0',
-    psi:        '#333333',
+    psi:        '#150C22',
     omega:      '#FFFFFF',
 }
   

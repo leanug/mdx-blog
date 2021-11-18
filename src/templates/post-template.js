@@ -1,5 +1,4 @@
 import React from 'react'
-import Categories from '../components/Categories'
 import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import PropTypes from 'prop-types'
@@ -25,11 +24,6 @@ const PostTemplate = ({ data }) => {
           title={ title }
         />
         <Wrapper>
-          <aside>
-            <Categories />
-          </aside>
-          
-          <div className="body">
             <header>
               <div className="header-info">
                 <StaticImage
@@ -45,10 +39,6 @@ const PostTemplate = ({ data }) => {
               </div>
             </header>
             <MDXRenderer>{ body }</MDXRenderer>
-          </div>
-
-          <aside>
-          </aside>
         </Wrapper>
     </>
   )
@@ -57,19 +47,11 @@ const PostTemplate = ({ data }) => {
 const Wrapper = styled.article`
     max-width: var(--max-width);
     margin: auto;
-    display: grid;
-    grid-template-columns: 1fr 80rem 1fr;
-    grid-gap: 4rem;
-    
-    @media screen and ( max-width: 768px ) {
-        grid-gap: 6rem 8rem;
-    }
 
     .header-info {
       align-items: center;
       display: flex;
       font-size: var(--font-small);
-      margin-left: 1rem;
     }
 
     .author-img {
@@ -85,19 +67,17 @@ const Wrapper = styled.article`
       width: .8rem;
     }
 
-    .body {
-      & > * {
-        margin-bottom: 2.5rem;
-      }
+    & > * {
+      margin-bottom: 2.5rem;
+    }
 
-      a {
-      color: var(--clr-psi);
-      text-decoration: underline;
+    a {
+    color: var(--clr-psi);
+    text-decoration: underline;
 
-      &:hover {
-        color: var(--clr-alpha);
-        text-decoration: none;
-      }
+    &:hover {
+      color: var(--clr-alpha);
+      text-decoration: none;
     }
 
     ol {

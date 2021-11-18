@@ -5,13 +5,15 @@ import styled from 'styled-components'
 
 const Posts = ({ posts }) => {
     return (
-        <Wrapper>
+        <div>
             { posts && posts.map((post, index)  => {
-                const { frontmatter: { category, title, image, slug }, excerpt } = post
+                const { frontmatter: { category, date, humanDate, title, image, slug }, excerpt } = post
                 return (
                     <Item 
                         categories={ category }
-                        excerpt= { excerpt }
+                        date={ date }
+                        excerpt={ excerpt }
+                        humanDate={ humanDate }
                         image={ image } 
                         key={ index } 
                         slug={ slug } 
@@ -19,13 +21,9 @@ const Posts = ({ posts }) => {
                     />
                 )
             })}
-        </Wrapper>
+        </div>
     )
 }
-
-const Wrapper = styled.div`
-    
-`
 
 Posts.defaultProps = {
     posts: []
