@@ -43,11 +43,11 @@ const BackToTopBtn = () => {
 
 const Button = styled.button`
     align-items: center;
-    background-color: var(--clr-gamma);
+    background-color: var(--clr-beta);
     border: none;
     border-radius: 50%;
     bottom: 2rem;
-    color: var(--clr-psi);
+    color: var(--clr-omega);
     cursor: pointer;
     display: flex;
     font-size: 2rem;

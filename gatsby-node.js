@@ -23,20 +23,15 @@ exports.createPages = async ({ graphql, actions }) => {
     createPage({
       path: `/${slug}`,
       component: path.resolve(`src/templates/post-template.js`),
-      context: {
-        slug,
-      },
+      context: { slug },
     })
   })
 
-  result.data.categories.distinct.forEach(cat => {
-    const catUrl = cat.replace(' ', '-')
+  result.data.categories.distinct.forEach(category => {
     createPage({
-      path: `/${ catUrl }`,
-      component: path.resolve(`src/templates/categories-template.js`),
-      context: {
-        cat,
-      },
+      path: `/categories/${ category }`,
+      component: path.resolve(`src/templates/category-template.js`),
+      context: { category },
     })
   })
 }

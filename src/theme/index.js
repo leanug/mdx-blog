@@ -4,7 +4,7 @@ export const lightTheme = {
     beta:       '#595959', 
     gamma:      '#F6F6F6',
     delta:      '#EB0000',
-    epsilon:    '#F6F6F6',
+    epsilon:    '#F286B0',
     psi:        '#333333',
     omega:      '#FFFFFF',
 }
@@ -15,7 +15,7 @@ export const darkTheme = {
     beta:       '#999999',
     gamma:      '#666666',
     delta:      '#FF3333',
-    epsilon:    '#131313',
+    epsilon:    '#F286B0',
     psi:        '#E8E8E8',
     omega:      '#23252A',
 }

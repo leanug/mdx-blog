@@ -1,15 +1,16 @@
 import React from 'react'
+import { Link } from 'gatsby'
 import styled from 'styled-components'
 
 const Footer = () => {
     return (
         <Wrapper>
-            <div className="wrapper">
-                <div>
-                    <span style={{ fontWeight: '700' }}>AlienShip</span>
-                    <span>Made by Leandro</span>
-                    <span>Newsletter</span>
-                    <span>About</span>
+            <div className="container">
+                <div className="left-column">
+                    <Link style={{ fontWeight: '700' }} to="/newsletter">AlienShip</Link>
+                    <a href="https://www.leandroubilla.com">Design and built by Leandro</a>
+                    <Link to="/newsletter">Newsletter</Link>
+                    <Link to="/about">About</Link>
                 </div>
                 <div>
                     <span style={{ marginRight: '2rem' }}> <a href="https://www.instagram.com/aerion.studio/">Instagram</a></span>
@@ -27,9 +28,19 @@ const Wrapper = styled.footer`
     padding-bottom: 2rem;
 
     @media screen and ( min-width: 576px ) {
-        .wrapper {
+        .container {
             display: flex;
             justify-content: space-between;
+            max-width: var(--max-width);
+            margin: auto;
+            width: 100%;
+        }
+    }
+
+    .left-column {
+        span, 
+        a {
+            margin-right: 2rem;
         }
     }
 

@@ -5,12 +5,17 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import PropTypes from 'prop-types'
 import Seo from "../components/SEO"
 import styled from 'styled-components'
+import { StaticImage } from 'gatsby-plugin-image'
 
 const PostTemplate = ({ data }) => {
   const { 
     mdx: { 
-      frontmatter: { title },
+      frontmatter: {
+        date,
+        title
+      },
       body,
+      timeToRead
     }, 
   } = data
 
@@ -21,21 +26,28 @@ const PostTemplate = ({ data }) => {
         />
         <Wrapper>
           <aside>
-            categorias
+            <Categories />
           </aside>
           
           <div className="body">
-            <h1>{ title }</h1>
+            <header>
+              <div className="header-info">
+                <StaticImage
+                  alt="author"
+                  height={ 30 }
+                  src="../images/authors/leandro.jpg"
+                  width={ 30 }
+                  className="author-img"
+                />
+                <span style={{ marginLeft: '1rem' }}>by Leandro</span>
+                <div className="circle"></div>
+                <span>Updated: <time dateTime="2021-04-05">{ date }</time></span>
+              </div>
+            </header>
             <MDXRenderer>{ body }</MDXRenderer>
           </div>
 
           <aside>
-            Adsense Block
-            <ul>
-                <li>Mas leido numero uno</li>
-                <li>Mas leidos numero dos</li>
-                <li>Mas leido numero ters y cuatro tambien</li>
-            </ul>
           </aside>
         </Wrapper>
     </>
@@ -53,32 +65,54 @@ const Wrapper = styled.article`
         grid-gap: 6rem 8rem;
     }
 
-  .body {
+    .header-info {
+      align-items: center;
+      display: flex;
+      font-size: var(--font-small);
+      margin-left: 1rem;
+    }
 
-  }
+    .author-img {
+        border-radius: 50%;
+      }
 
-  /* Applies margin bottom to all elements inside MDXRenderer */
-  .body > * {
-    margin-bottom: 2.5rem;
-  }
+    .circle {
+      background-color: var(--clr-alpha);
+      border-radius: 50%;
+      display: inline-block;
+      height: .8rem;
+      margin: 0 .8rem .4rem .8rem;
+      width: .8rem;
+    }
 
-  a {
-    color: var(--clr-alpha);
-  }
+    .body {
+      & > * {
+        margin-bottom: 2.5rem;
+      }
 
-  ol,
-  ul {
-    margin-left: 2rem;
-  }
+      a {
+      color: var(--clr-psi);
+      text-decoration: underline;
 
-  blockquote {
-    border-left: .6rem solid var(--clr-alpha);
-    padding: 0 2rem;
-  }
+      &:hover {
+        color: var(--clr-alpha);
+        text-decoration: none;
+      }
+    }
 
-  .author {
-    margin-bottom: 1rem;
-    text-transform: capitalize;
+    ol {
+      margin-left: 2rem;
+    }
+
+    blockquote {
+      border-left: .6rem solid var(--clr-alpha);
+      padding: 0 2rem;
+    }
+
+    .author {
+      margin-bottom: 1rem;
+      text-transform: capitalize;
+    }
   }
 `
 
@@ -86,10 +120,13 @@ export const query = graphql`
   query GetSinglePost ($slug: String){
     mdx( frontmatter: {slug: {eq: $slug}}) {
       frontmatter {
+        date(formatString: "YYYY MMMM Do")
         slug
         title
       }
       body
+      tableOfContents
+      timeToRead
     }
   }
 `

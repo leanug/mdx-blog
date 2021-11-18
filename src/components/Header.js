@@ -1,20 +1,23 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import Moon from './icons/Moon'
 import styled from 'styled-components'
 
 const Navbar = ({ toggleTheme }) => {
 
     return (
-        <Header className="wrapper">
+        <Header>
             <div>
-                <span className="logo">AlienShip</span>
+                <Link to="/">
+                    <span className="logo">AlienShip</span>
+                </Link>
             </div>
 
             <ThemeTogglerBtn
                 aria-label="Dark or light website theme toggler"
                 onClick={ toggleTheme }
             >
-                M
+                <Moon />
             </ThemeTogglerBtn>
         </Header>
     )
@@ -26,7 +29,9 @@ const Header = styled.header`
     display: flex;
     height: 10rem;
     justify-content: space-between;
-    margin-top: 3rem;
+    margin: 3rem auto 4rem auto;
+    max-width: var(--max-width);
+    width: 100%;
     transition: color 0.3s linear;
 
     .logo {

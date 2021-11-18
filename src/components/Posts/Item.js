@@ -3,9 +3,9 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import styled from 'styled-components'
 import { Link } from 'gatsby'
 
-const Item = ({ categories, title, excerpt, image, slug }) => {
+const Item = ({ categories, title, excerpt, image, slug, date }) => {
     const img = getImage( image )
-
+    console.log(date);
     return (
         <Wrapper>
             <Link to={ `/${slug}` }>
@@ -22,7 +22,9 @@ const Item = ({ categories, title, excerpt, image, slug }) => {
                 <div className="container">
                     <div className="head">
                         <div className="circle"></div>
-                        <span>Updated: 31 march 2019</span>
+                        <span>
+                            Updated: <time dateTime="2017-02-14">{ date }</time>
+                        </span>
                     </div>
                     <h2>{ title }</h2>
                     <p>{ excerpt }</p><span className="read-more">Continue Reading</span>

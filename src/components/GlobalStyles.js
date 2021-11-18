@@ -2,22 +2,21 @@ import { createGlobalStyle } from 'styled-components'
 
 const Globals = createGlobalStyle`
     :root {
+        --clr-alpha: ${ ({ theme }) => theme.alpha };
+        --clr-beta: ${ ({ theme }) => theme.beta };
+        --clr-gamma: ${ ({ theme }) => theme.gamma };
+        --clr-delta: ${ ({ theme }) => theme.delta };
+        --clr-epsilon: ${ ({ theme }) => theme.epsilon };
+        --clr-omega: ${ ({ theme }) => theme.omega };
+        --clr-psi: ${ ({ theme }) => theme.psi };
         --font-small: 1.4rem;
+        --line-height-alpha: 1.5;
+        --line-height-beta: 2;
+        --max-width: 140rem;
         --primary-font: Verdana, Helvetica, Arial, sans-serif;
         --radius-alpha: 0.5rem;
         --radius-beta: 1rem;
         --radius-gamma: 2rem;
-        --line-height-alpha: 1.5;
-        --line-height-beta: 2;
-        --max-width: 140rem;
-        --clr-alpha: ${({ theme }) => theme.alpha };
-        --clr-alpha-light: #278BEF;
-        --clr-beta: ${({ theme }) => theme.beta };
-        --clr-gamma: ${({ theme }) => theme.gamma };
-        --clr-delta: ${({ theme }) => theme.delta };
-        --clr-omega: ${({ theme }) => theme.omega };
-        --clr-psi: ${({ theme }) => theme.psi };
-        --shadow: drop-shadow(0px 0px 10px rgba(0,0,0,.1));
     }
 
     *,
@@ -83,6 +82,7 @@ const Globals = createGlobalStyle`
     }
 
     a:hover {
+        color: var(--clr-alpha);
         text-decoration: none;
     }
 

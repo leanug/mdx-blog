@@ -6,9 +6,7 @@ import styled from 'styled-components'
 const NotFoundPage = () => {
     return (
         <>
-            <Seo 
-                title="404 - Page not found"
-            />
+            <Seo title="404 - Page not found" />
             <Wrapper>
                 <div className="text-center">
                     <h1 className="display-one">404</h1>
