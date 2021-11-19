@@ -7,37 +7,54 @@ const Item = ({ date, excerpt, humanDate, image, slug, title }) => {
     const img = getImage( image )
     
     return (
-        <Wrapper>
-            <Link to={ `/${slug}` }>
-                { image && 
-                    <div>
+        <Wrapper image>
+            { image && 
+                <div>
+                    <Link to={ `/${slug}` }>
                         <GatsbyImage
                             alt={ title }
                             imgClassName="img" 
                             image={ img } alt={ title }
                             loading="lazy"
                         />
-                    </div>
-                }
-                <div className="container">
-                    <span>Updated: <time dateTime={ date }>{ humanDate }</time></span>
-                    <h2>{ title }</h2>
-                    <p>{ excerpt }</p>
-                    <span className="read-more">Continue Reading</span>
+                    </Link>
                 </div>
-            </Link>
+            }
+            <div className="container">
+                <span className="date">
+                    Updated: <time dateTime={ date }>{ humanDate }</time>
+                </span>
+                <Link to={ `/${slug}` }>
+                    <h2>{ title }</h2>
+                </Link>
+                <p>{ excerpt }</p>
+                <Link className="read-more" to={ `/${slug}` }>
+                    Continue Reading
+                </Link>
+            </div>
         </Wrapper>
     )
 } 
   
-const Wrapper = styled.article`
+const Wrapper = styled.section`
+    align-items: center;
     height: 100%;
     width: 100%;
+    display: grid;
+    grid-template-columns: 30rem 1fr;
+    grid-gap: 2rem;
 
-    a {
-        display: grid;
-        grid-template-columns: 10rem 1fr;
-        grid-gap: 2rem;
+    &:not(:last-child) {
+        margin-bottom: 4rem;
+    }
+
+    @media screen and (max-width: 576px) {
+        display: block;
+        margin-bottom: 6rem;
+
+        .container {
+            margin-top: 2rem;
+        }
     }
 
     .img {
@@ -45,9 +62,7 @@ const Wrapper = styled.article`
         margin-right: 2rem;
     }
 
-    &:not(:last-child) {
-        margin-bottom: 4rem;
-    }
+    
 
     .category {
         text-transform: capitalize;
@@ -60,6 +75,10 @@ const Wrapper = styled.article`
         font-size: var(--font-small);
     }
 
+    .date {
+        color: var(--clr-beta);
+    }
+
     .link {
         display: flex;
         align-items: center;
@@ -70,9 +89,13 @@ const Wrapper = styled.article`
     }
 
     .read-more {
-        color: var(--clr-alpha);
-        display: block;
+        background-color: var(--clr-alpha);
+        border-radius: var(--radius-alpha);
+        color: var(--clr-omega);
+        display: inline-block;
+        font-size: var(--font-small);
         margin-top: 1rem;
+        padding: 1rem 1.8rem;
     }
 `
   

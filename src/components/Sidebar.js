@@ -1,10 +1,9 @@
 import React from 'react'
-//import links from '../constants/links'
+import Categories from '../components/Categories'
+import Close from './icons/Close'
 import styled from 'styled-components'
 
 const Sidebar = ({ showSidebar, toggleSidebar }) => {
-  /* It closes the sidebar and scrolls to the selected section */
-  
   return (
     <Wrapper 
         className={ `${ showSidebar ? 'sidebar showSidebar' : 'sidebar' }` }
@@ -16,14 +15,13 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
             className="close-btn"
             aria-label="Close sidebar"
           >
-            X
+            <Close />
           </button>
       </div>
       <div className="sidebar-content">
         <div className="content">
-         Links
+          <Categories />
         </div>
-        
       </div>
     </Wrapper>
   )
@@ -31,9 +29,9 @@ const Sidebar = ({ showSidebar, toggleSidebar }) => {
 
 const Wrapper = styled.aside`
     &.sidebar {
-      background-color: ${({ theme }) => theme.epsilon };
+      background-color: var(--clr-psi);
+      color: var(--clr-omega);
       display: grid;
-      font-family: var(--secondary-font);
       grid-auto-flow: row;
       grid-template-rows: auto 1fr;
       height: 100vh;
@@ -59,7 +57,7 @@ const Wrapper = styled.aside`
       .close-btn {
         background-color: transparent;
         border: none;
-        color: ${({ theme }) => theme.psi };
+        color: var(--clr-omega);
         cursor: pointer;
         font-size: 3rem;
       }
