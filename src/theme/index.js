@@ -1,21 +1,21 @@
 export const lightTheme = {
     name:       'light',
-    alpha:      '#EA4E8B', 
-    beta:       '#595959', 
+    alpha:      '#00D07E', 
+    beta:       '#57576B', 
     gamma:      '#F6F6F6',
-    delta:      '#EB0000',
-    epsilon:    '#F286B0',
-    psi:        '#150C22',
+    delta:      '#DDFCF0',
+    epsilon:    '#6EFFA8',
+    psi:        '#101010',
     omega:      '#FFFFFF',
 }
   
 export const darkTheme = {
     name:       'dark',
     alpha:      '#6EFFA8', 
-    beta:       '#999999',
-    gamma:      '#666666',
-    delta:      '#FF3333',
-    epsilon:    '#F286B0',
-    psi:        '#E8E8E8',
-    omega:      '#23252A',
+    beta:       '#9A9DA7',
+    gamma:      '#1E1E1E',
+    delta:      '#004228',
+    epsilon:    '#96FFC0',
+    psi:        '#FFFFFF',
+    omega:      '#101010',
 }

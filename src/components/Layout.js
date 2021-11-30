@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import GlobalStyles from './GlobalStyles'
 import BackToTopBtn from './BackToTopBtn'
 import Footer from './Footer'
@@ -17,10 +17,19 @@ const Layout = ({ children, location: { pathname } }) => {
   /* Dark and Light themes */
   const [theme, setTheme] = useState('light')
   const [showSidebar, setShowSidebar] = useState(false)
+  const [currentPage, setCurrentPage] = useState('/')
 
-  const toggleSidebar = _ => {
+  const toggleSidebar = useCallback(() => {
     setShowSidebar(! showSidebar)
-  }
+  }, [showSidebar])
+
+  /* Close sidebar on page change */
+  useEffect(() => {
+    if (currentPage !== pathname && showSidebar) {
+      toggleSidebar()
+    }
+    setCurrentPage(pathname)
+  }, [pathname, showSidebar, currentPage, toggleSidebar])
 
   const toggleTheme = _ => {
   if (theme === 'light') {
@@ -44,15 +53,16 @@ const Layout = ({ children, location: { pathname } }) => {
     >
       <GlobalStyles />
       <Sidebar 
-        toggleSidebar={ toggleSidebar }
         showSidebar={ showSidebar }
-        />
+        toggleSidebar={ toggleSidebar }
+        pathname={ pathname }
+      />
       <BackToTopBtn />
       <PageWrapper>
-        <Header 
+        <Header
+          theme={ theme }
           toggleTheme={ toggleTheme }
           toggleSidebar={ toggleSidebar }
-          pathname={ pathname } 
         />
         <main>
           { children }
@@ -70,8 +80,9 @@ const PageWrapper = styled.div`
   width: 100%;
 
   main {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    margin-top: 6rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 `
 

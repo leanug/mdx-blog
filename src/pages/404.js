@@ -8,9 +8,8 @@ const NotFoundPage = () => {
         <>
             <Seo title="404 - Page not found" />
             <Wrapper>
-                <div className="text-center">
-                    <h1 className="display-one">404</h1>
-                    <h2 className="display-four mb-30">Page not found</h2>
+                <div style={{ textAlign: 'center' }}>
+                    <h1 style={{ marginBottom: '3rem' }}>404<br />Page not found</h1>
                     <Link className="button" to="/">Home</Link>
                 </div>
             </Wrapper>
@@ -25,9 +24,13 @@ const Wrapper = styled.div`
     height: 100%;
 
     .button {
-        border: 1px solid ${({ theme }) => theme.gamma };
+        background-color: var(--clr-alpha);
         border-radius: var(--radius-alpha);
-        padding: 1rem 2rem;
+        padding: 1.4rem 3rem;
+
+        &:hover {
+            color: var(--clr-omega);
+        }
     }
 `
 

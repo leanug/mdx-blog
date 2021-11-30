@@ -1,4 +1,5 @@
 import React from 'react'
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import PropTypes from 'prop-types'
@@ -11,13 +12,15 @@ const PostTemplate = ({ data }) => {
     mdx: { 
       frontmatter: {
         date,
+        humanDate,
+        image,
         title
       },
       body,
-      tableOfContents,
-      timeToRead
     }, 
   } = data
+
+  const img = getImage( image )
 
   return (
     <>
@@ -26,28 +29,26 @@ const PostTemplate = ({ data }) => {
       />
       <Wrapper>
         <header>
+          <h1>{ title }</h1>
           <div className="header-info">
             <StaticImage
               alt="author"
               height={ 30 }
-              src="../images/authors/leandro.jpg"
+              src="../images/author/author.jpg"
               width={ 30 }
               className="author-img"
             />
-            <span style={{ marginLeft: '1rem' }}>by Leandro</span>
+            <span style={{ marginLeft: '1rem' }}>Written by Leandro</span>
             <div className="circle"></div>
-            <span>Updated: <time dateTime="2021-04-05">{ date }</time></span>
+            <span>Updated: <time dateTime={ date }>{ humanDate }</time></span>
           </div>
         </header>
-        <nav>
-          <ul>
-            {tableOfContents.items.map(item => {
-              return (
-                <li key={ item.url }>{ item.title }</li>
-              )
-            })}
-          </ul>
-        </nav>
+        <GatsbyImage
+            alt={ title }
+            imgClassName="img" 
+            image={ img }
+            loading="lazy"
+        />
         <MDXRenderer>{ body }</MDXRenderer>
       </Wrapper>
     </>
@@ -55,14 +56,29 @@ const PostTemplate = ({ data }) => {
 }
 
 const Wrapper = styled.article`
-  max-width: 80rem;
+  max-width: var(--content-width);
   margin: auto;
+  width: 100%;
 
   .header-info {
     align-items: center;
     color: var(--clr-beta);
     display: flex;
     font-size: var(--font-small);
+    margin-bottom: 1.2rem;
+  }
+
+  h1 {
+    margin-bottom: 1.2rem;
+  }
+
+  .time-to-read {
+    color: var(--clr-beta);
+    font-size: var(--font-small);
+  }
+
+  img {
+    border-radius: var(--radius-alpha);
   }
 
   .author-img {
@@ -74,12 +90,13 @@ const Wrapper = styled.article`
     border-radius: 50%;
     display: inline-block;
     height: .8rem;
-    margin: 0 .8rem .4rem .8rem;
+    margin: .4rem .8rem .4rem .8rem;
     width: .8rem;
-  }
+  }  
 
-  & > * {
+  & > *:not(:last-child) {
     margin-bottom: 2.5rem;
+    width: 100%;
   }
 
   a {
@@ -92,7 +109,7 @@ const Wrapper = styled.article`
     }
   }
 
-  ol {
+  ol, ul {
     margin-left: 2rem;
   }
 
@@ -105,19 +122,29 @@ const Wrapper = styled.article`
     margin-bottom: 1rem;
     text-transform: capitalize;
   }
+
+  pre {
+    overflow-x: auto;
+  }
 `
 
 export const query = graphql`
   query GetSinglePost ($slug: String){
     mdx( frontmatter: {slug: {eq: $slug}}) {
       frontmatter {
-        date(formatString: "YYYY MMMM Do")
-        slug
+        date
+        humanDate: date(formatString: "YYYY MMMM Do")
+        image {
+            childImageSharp {
+                gatsbyImageData(
+                    placeholder: BLURRED
+                    width: 950
+                )
+            }
+        }
         title
       }
       body
-      tableOfContents
-      timeToRead
     }
   }
 `

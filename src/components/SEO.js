@@ -6,8 +6,8 @@
  */
 
 import * as React from "react"
-import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
+import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
 function Seo({ description, lang, meta, title }) {
@@ -18,13 +18,12 @@ function Seo({ description, lang, meta, title }) {
           siteMetadata {
             title
             description
-            author
           }
         }
       }
     `
   )
-
+      
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = site.siteMetadata?.title
 
@@ -33,8 +32,8 @@ function Seo({ description, lang, meta, title }) {
       htmlAttributes={{
         lang,
       }}
-      title={defaultTitle}
-      titleTemplate={title ? `%s | ${defaultTitle}` : null}
+      title={ defaultTitle }
+      titleTemplate={ title ? title : defaultTitle }
       meta={[
         {
           name: `description`,

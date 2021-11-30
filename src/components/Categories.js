@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 import styled from 'styled-components'
 import { useStaticQuery, graphql } from "gatsby"
 
-const Categories = () => {
+const Categories = ({ styleClass }) => {
     const data = useStaticQuery(graphql`
         {
             allMdx {
@@ -15,8 +15,7 @@ const Categories = () => {
 
     return (
         <>
-            <div style={{ fontWeight: '600', marginBottom: '1rem' }}>Categories</div>
-            <Wrapper>
+            <Wrapper className={styleClass}>
                 {categories && categories.map((cat, index) => {
                         const catUrl = cat.replace(' ', '-')
                         return (
@@ -39,9 +38,42 @@ const Wrapper = styled.ul`
         a {
             color: var(--clr-alpha);
             font-weight: 600;
+        }
+    }
 
-            &:hover {
-                color: var(--clr-epsilon);
+    &.sidebar-categories {
+        margin-left: 2rem;
+        margin-top: 2rem;
+
+        li {
+            a {
+                font-size: var(--font-small);
+            }
+        }
+    }
+
+    &.header-categories {
+        list-style-type: none;
+        display: flex;
+        flex-wrap: wrap;
+
+        li {
+            margin-right: 1rem;
+            
+            a {
+                border: 1px solid var(--clr-epsilon);
+                border-radius: var(--radius-alpha);
+                display: inline-block;
+                font-size: var(--font-small);
+                padding: .3rem 1.5rem;
+
+                @media screen and (max-width: 600px) {
+                    margin-bottom: 1rem;
+                }
+
+                &:hover {
+                    background-color: var(--clr-delta);;
+                }
             }
         }
     }

@@ -1,4 +1,5 @@
 import React from 'react'
+import SocialLinks from '../constants/socialLInks'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 
@@ -7,14 +8,13 @@ const Footer = () => {
         <Wrapper>
             <div className="container">
                 <div className="left-column">
-                    <Link style={{ fontWeight: '700' }} to="/newsletter">AlienShip</Link>
-                    <a href="https://www.leandroubilla.com">Design and built by Leandro</a>
-                    <Link to="/newsletter">Newsletter</Link>
-                    <Link to="/about">About</Link>
+                    <Link style={{ fontWeight: '700' }} to="/newsletter">OneBlog</Link>
+                    <span style={{ marginRight: '2rem' }}>
+                        <a href="https://unsplash.com">Images from Unsplash</a>
+                    </span>
                 </div>
                 <div>
-                    <span style={{ marginRight: '2rem' }}> <a href="https://www.instagram.com/aerion.studio/">Instagram</a></span>
-                    <span><a href="https://www.fiverr.com/leanug/create-a-responsive-and-fast-website">Fiverr</a></span>
+                    <SocialLinks />
                 </div>
             </div>
         </Wrapper>
@@ -24,16 +24,29 @@ const Footer = () => {
 const Wrapper = styled.footer`
     background-color: var(--clr-gamma);
     margin-top: 12rem;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding: 2rem;
+
+    * {
+        color: var(--clr-psi);
+    }
 
     @media screen and ( min-width: 576px ) {
         .container {
             display: flex;
             justify-content: space-between;
-            max-width: var(--max-width);
             margin: auto;
+            max-width: var(--max-width);
             width: 100%;
+        }
+    }
+
+    @media screen and ( max-width: 576px ) {
+        padding: 1rem 2rem;
+
+        .container {
+            div {
+                margin: 1rem 0;
+            }
         }
     }
 

@@ -1,53 +1,30 @@
 import React from 'react'
-import Breadcrumbs from '../components/Breadcrumbs'
-import Categories from '../components/Categories'
-import Newsletter from '../components/Newsletter'
 import { graphql } from "gatsby"
 import Posts from '../components/Posts'
 import Seo from '../components/SEO'
 import styled from 'styled-components'
 
-const CategoryTemplate = (props) => {
+const CategoryTemplate = props => {
     const { allMdx: { nodes: posts } } = props.data
 
     return (
         <>
-            <Seo title={ posts.category } />
+            <Seo />
             <Wrapper>
-                <aside>
-                    <Categories />
-                    <br />
-                    <Newsletter />
-                </aside>
-                <article>
-                    <Breadcrumbs 
-                        category={ props.pageContext.category } 
-                        categoryPathname= { props.location.pathname }
-                        categories={ posts.length }
-                    />
-                    <Posts posts={ posts } />
-                </article>
+                <h1 style={{ marginBottom: '1rem' }}>{ props.pageContext.category }</h1>
+                <Posts posts={ posts } />
             </Wrapper>
         </>
     )
 }
 
 const Wrapper = styled.div`
-    display: grid;
-    grid-template-columns: 30rem 1fr;
-    max-width: var(--max-width);
     margin: auto;
-    grid-gap: 8rem;
+    max-width: var(--content-width);
 
-    @media screen and (max-width: 1200px) {
-        display: block;
-        margin: auto;
-        padding: 0 1rem;
-        max-width: 80rem;
-
-        aside {
-            display: none;
-        }
+    h1 {
+        font-size: 3.2rem;
+        text-transform: capitalize;
     }
 `
 
@@ -60,15 +37,16 @@ export const query = graphql`
         ) {
             nodes {
                 frontmatter {
+                    author
                     category
                     date
                     humanDate: date(formatString: "YYYY MMMM Do")
                     image {
                         childImageSharp {
                             gatsbyImageData(
-                                height: 576
                                 placeholder: BLURRED
-                                width: 576
+                                width: 850
+                                height: 450
                             )
                         }
                     }

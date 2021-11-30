@@ -1,32 +1,51 @@
 import React from 'react'
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
-import styled from 'styled-components'
 import { Link } from 'gatsby'
+import PropTypes from "prop-types"
+import { StaticImage } from 'gatsby-plugin-image'
+import styled from 'styled-components'
 
-const Item = ({ date, excerpt, humanDate, image, slug, title }) => {
+const Item = ({ 
+    author, 
+    date, 
+    excerpt, 
+    humanDate, 
+    image, 
+    slug, 
+    title 
+}) => {
     const img = getImage( image )
-    
+
     return (
-        <Wrapper image>
-            { image && 
-                <div>
-                    <Link to={ `/${slug}` }>
-                        <GatsbyImage
-                            alt={ title }
-                            imgClassName="img" 
-                            image={ img } alt={ title }
-                            loading="lazy"
-                        />
-                    </Link>
-                </div>
-            }
-            <div className="container">
-                <span className="date">
-                    Updated: <time dateTime={ date }>{ humanDate }</time>
-                </span>
+        <Wrapper>
+            <header style={{ marginBottom: '2.2rem' }}>
                 <Link to={ `/${slug}` }>
                     <h2>{ title }</h2>
                 </Link>
+                <div style={{ marginTop: '1rem' }}>
+                    <StaticImage
+                        alt="author"
+                        height={ 30 }
+                        src="../../images/author/author.jpg"
+                        width={ 30 }
+                        className="author-img"
+                    />
+                    <span>Written by {author}</span>
+                    <div className="circle"></div>
+                    <span>Updated: <time dateTime={ date }>{ humanDate }</time></span>
+                </div>
+            </header>
+            { image &&
+                <Link to={ `/${slug}` }>
+                    <GatsbyImage
+                        alt={ title }
+                        imgClassName="img" 
+                        image={ img }
+                        loading="lazy"
+                    />
+                </Link>
+            }
+            <div style={{ margin: '2rem auto 0 auto' }}>
                 <p>{ excerpt }</p>
                 <Link className="read-more" to={ `/${slug}` }>
                     Continue Reading
@@ -37,32 +56,44 @@ const Item = ({ date, excerpt, humanDate, image, slug, title }) => {
 } 
   
 const Wrapper = styled.section`
-    align-items: center;
     height: 100%;
+    margin: auto;
     width: 100%;
-    display: grid;
-    grid-template-columns: 30rem 1fr;
-    grid-gap: 2rem;
 
-    &:not(:last-child) {
-        margin-bottom: 4rem;
-    }
-
-    @media screen and (max-width: 576px) {
-        display: block;
-        margin-bottom: 6rem;
-
-        .container {
-            margin-top: 2rem;
-        }
+    &:not(:last-of-type) {
+        border-bottom: 1px solid var(--clr-gamma);
+        margin-bottom: 2.5rem;
+        padding-bottom: 4rem;
     }
 
     .img {
         border-radius: var(--radius-alpha);
-        margin-right: 2rem;
+    }   
+    
+    .info {
+        align-items: center;
+        display: flex;
     }
 
-    
+    .circle {
+        background-color: var(--clr-alpha);
+        border-radius: 50%;
+        display: inline-block;
+        height: .8rem;
+        margin: .4rem .8rem .1rem .8rem;
+        width: .8rem;
+    }
+
+    .author-img {
+        border-radius: 50%;
+        margin-right: 1rem;
+    }
+
+    .container {
+        margin-top: 2rem;
+    }
+
+    h2 { padding: .5rem 0; }
 
     .category {
         text-transform: capitalize;
@@ -93,10 +124,24 @@ const Wrapper = styled.section`
         border-radius: var(--radius-alpha);
         color: var(--clr-omega);
         display: inline-block;
-        font-size: var(--font-small);
-        margin-top: 1rem;
-        padding: 1rem 1.8rem;
+        font-weight: 600;
+        margin-top: 1.5rem;
+        padding: 1rem 2.2rem;
+
+        &:hover {
+            background-color: var(--clr-epsilon);
+        }
     }
 `
-  
+
+Item.propTypes = {
+    author: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    excerpt: PropTypes.string.isRequired,
+    humanDate: PropTypes.string.isRequired,
+    image: PropTypes.object.isRequired,
+    slug: PropTypes.string.isRequired, 
+    title: PropTypes.string.isRequired, 
+}
+
 export default Item

@@ -1,15 +1,26 @@
 import React from 'react'
 import Item from './Item'
 import PropTypes from "prop-types"
-import styled from 'styled-components'
 
 const Posts = ({ posts }) => {
     return (
         <div>
             { posts && posts.map((post, index)  => {
-                const { frontmatter: { category, date, humanDate, title, image, slug }, excerpt } = post
+                const { 
+                    frontmatter: { 
+                        author,
+                        category, 
+                        date, 
+                        humanDate, 
+                        title, 
+                        image, 
+                        slug 
+                    }, excerpt 
+                } = post
+
                 return (
-                    <Item 
+                    <Item
+                        author={ author }
                         categories={ category }
                         date={ date }
                         excerpt={ excerpt }

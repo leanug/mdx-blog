@@ -2,21 +2,23 @@ import { createGlobalStyle } from 'styled-components'
 
 const Globals = createGlobalStyle`
     :root {
-        --clr-alpha: ${ ({ theme }) => theme.alpha };
-        --clr-beta: ${ ({ theme }) => theme.beta };
+        --clr-alpha: ${ ({ theme }) => theme.alpha }; // Primary
+        --clr-beta: ${ ({ theme }) => theme.beta }; // Text
         --clr-gamma: ${ ({ theme }) => theme.gamma };
-        --clr-delta: ${ ({ theme }) => theme.delta };
-        --clr-epsilon: ${ ({ theme }) => theme.epsilon };
-        --clr-omega: ${ ({ theme }) => theme.omega };
-        --clr-psi: ${ ({ theme }) => theme.psi };
+        --clr-delta: ${ ({ theme }) => theme.delta }; // Soft background
+        --clr-epsilon: ${ ({ theme }) => theme.epsilon }; // Borders
+        --clr-omega: ${ ({ theme }) => theme.omega }; // Background
+        --clr-psi: ${ ({ theme }) => theme.psi }; // Text
         --font-small: 1.4rem;
         --line-height-alpha: 1.5;
         --line-height-beta: 2;
         --max-width: 140rem;
-        --primary-font: Verdana, Helvetica, Arial, sans-serif;
+        --content-width: 80rem;
         --radius-alpha: 0.5rem;
         --radius-beta: 1rem;
         --radius-gamma: 2rem;
+        --primary-font: Ubuntu, Helvetica, Arial, sans-serif;
+        --secondary-font: Ubuntu, Helvetica, Arial, sans-serif;
     }
 
     *,
@@ -34,7 +36,7 @@ const Globals = createGlobalStyle`
 
     body {
         background-color: var(--clr-omega);
-        color: var(--clr-psi);
+        color: var(--clr-beta);
         font-family: var(--primary-font);
         font-size: 1.8rem;
         line-height: var(--line-height-alpha);
@@ -68,14 +70,24 @@ const Globals = createGlobalStyle`
     .display-two,
     .display-three,
     .display-four  {
-        font-family: var(--primary-font);
+        color: var(--clr-psi);
+        font-family: var(--secondary-font);
         line-height: var(--line-height-alpha);
         margin: 0;
-        font-weight: 600;
+        font-weight: 700;
+    }
+
+    @media screen and (max-width: 768px) {
+        .header-1, h1 { font-size: 2.2rem; }
+        .header-2, h2 { font-size: 2rem; }
+        .header-3, h3 { font-size: 1.8rem; }
+        .header-4, h4 { font-size: 1.6rem; }
+        .header-5, h5 { font-size: 1.4rem; }
+        .header-6, h6 { font-size: 1.2rem; }
     }
 
     a {
-        color: var(--clr-psi);
+        color: var(--clr-beta);
         cursor: pointer;
         text-decoration: none;
         transition: all 0.2s linear;
@@ -109,54 +121,8 @@ const Globals = createGlobalStyle`
         padding: 1.4rem 2.2rem;
     }
 
-    .bg-light {
-        background-color: var(--clr-gamma);
-        color: var(--clr-psi);
-    }
-
-    .bg-dark {
-        background-color: var(--clr-psi);
-    }
-
-    .bg-alpha {
-        background-color: var(--clr-alpha);
-        transition: all 0.2s linear;
-
-        &:hover {
-            background-color: var(--clr-alpha-light);
-        }
-    }
-
     .text-alpha {
         color: var(--clr-alpha);
-    }
-
-    .section-my {
-        margin-bottom: calc( 6rem + 10vw );
-        margin-top: calc( 6rem + 10vw );
-
-        @media screen and ( min-width: 1200px ) {
-            margin-bottom: 16rem;
-            margin-top: 16rem;
-        }
-    }
-
-    .section-mb {
-        margin-bottom: calc( 6rem + 10vw );
-    }
-
-    .section-mt {
-        margin-top: calc( 6rem + 10vw );
-    }
-
-    @media screen and ( min-width: 1200px ) {
-        .section-mb {
-            margin-bottom: 16rem;
-        }
-
-        .section-mt {
-            margin-top: 16rem;
-        }
     }
 `
 
