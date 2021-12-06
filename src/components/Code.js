@@ -25,12 +25,15 @@ const Code = ({ codeString, language, ...props }) => {
 
 const Wrapper = styled.div`
   pre {
-    border-radius: var(--radius-alpha);
     font-size: 1.6rem;
     height: 100%;
-    //padding: 2rem;
+    padding: 2rem;
     overflow-x: scroll;
     width: calc(100vw - 6rem);
+
+    @media screen and (min-width: 840px) {
+      width: var(--content-width);
+    } 
   }
 `
 

@@ -30,9 +30,9 @@ const Item = ({
                         width={ 30 }
                         className="author-img"
                     />
-                    <span>Written by {author}</span>
-                    <div className="circle"></div>
-                    <span>Updated: <time dateTime={ date }>{ humanDate }</time></span>
+                    <span>
+                        by { author } · Updated: <time dateTime={ date }>{ humanDate }</time>
+                    </span>
                 </div>
             </header>
             { image &&
@@ -73,15 +73,6 @@ const Wrapper = styled.section`
     .info {
         align-items: center;
         display: flex;
-    }
-
-    .circle {
-        background-color: var(--clr-alpha);
-        border-radius: 50%;
-        display: inline-block;
-        height: .8rem;
-        margin: .4rem .8rem .1rem .8rem;
-        width: .8rem;
     }
 
     .author-img {

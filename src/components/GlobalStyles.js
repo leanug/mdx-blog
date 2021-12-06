@@ -124,6 +124,17 @@ const Globals = createGlobalStyle`
     .text-alpha {
         color: var(--clr-alpha);
     }
+
+    .mdx-img .gatsby-resp-image-wrapper,
+    .mdx-img .gatsby-resp-image-background-image,
+    .mdx-img .gatsby-resp-image-image {
+        border-radius: var(--radius-alpha);
+        max-width: 100% !important;
+        width: 100%;
+        &:not(:last-of-type) {
+            margin-bottom: 3rem;
+        }
+    }
 `
 
 export default Globals

@@ -1,6 +1,8 @@
 import React from 'react'
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
+import Home from '../components/icons/Home'
+import Slash from '../components/icons/Slash'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import PropTypes from 'prop-types'
 import Seo from "../components/SEO"
@@ -11,6 +13,8 @@ const PostTemplate = ({ data }) => {
   const { 
     mdx: { 
       frontmatter: {
+        author,
+        category,
         date,
         humanDate,
         image,
@@ -29,6 +33,16 @@ const PostTemplate = ({ data }) => {
       />
       <Wrapper>
         <header>
+          <nav className="breadcrumbs">
+            <Link to="/"><Home /></Link>
+            <Slash style={{ margin: '0 .8rem .3rem .8rem' }} />
+            <Link 
+              style={{ textTransform: 'capitalize', marginBottom: '.5rem' }} 
+              to={ `/categories/${ category.replace(' ', '-') }` }
+            >
+              { category }
+            </Link>
+          </nav>
           <h1>{ title }</h1>
           <div className="header-info">
             <StaticImage
@@ -38,9 +52,9 @@ const PostTemplate = ({ data }) => {
               width={ 30 }
               className="author-img"
             />
-            <span style={{ marginLeft: '1rem' }}>Written by Leandro</span>
-            <div className="circle"></div>
-            <span>Updated: <time dateTime={ date }>{ humanDate }</time></span>
+            <span style={{ marginLeft: '1rem' }}>
+              by { author } · Updated: <time dateTime={ date }>{ humanDate }</time>
+            </span>
           </div>
         </header>
         <GatsbyImage
@@ -49,7 +63,7 @@ const PostTemplate = ({ data }) => {
             image={ img }
             loading="lazy"
         />
-        <MDXRenderer>{ body }</MDXRenderer>
+        <MDXRenderer className="mdx-body">{ body }</MDXRenderer>
       </Wrapper>
     </>
   )
@@ -68,31 +82,33 @@ const Wrapper = styled.article`
     margin-bottom: 1.2rem;
   }
 
-  h1 {
-    margin-bottom: 1.2rem;
+  .breadcrumbs {
+    align-items: center;
+    display: flex;
+    font-size: var(--font-small);
+
+    a {
+      color: var(--clr-beta);
+    }
   }
 
-  .time-to-read {
-    color: var(--clr-beta);
+  .time {
     font-size: var(--font-small);
   }
 
-  img {
-    border-radius: var(--radius-alpha);
+  h1 {
+    margin-bottom: 1.2rem;
+    margin-top: 0.4rem;
+  }
+
+  .author {
+    margin-bottom: 1rem;
+    text-transform: capitalize;
   }
 
   .author-img {
     border-radius: 50%;
   }
-
-  .circle {
-    background-color: var(--clr-alpha);
-    border-radius: 50%;
-    display: inline-block;
-    height: .8rem;
-    margin: .4rem .8rem .4rem .8rem;
-    width: .8rem;
-  }  
 
   & > *:not(:last-child) {
     margin-bottom: 2.5rem;
@@ -118,11 +134,6 @@ const Wrapper = styled.article`
     padding: 0 2rem;
   }
 
-  .author {
-    margin-bottom: 1rem;
-    text-transform: capitalize;
-  }
-
   pre {
     overflow-x: auto;
   }
@@ -132,6 +143,8 @@ export const query = graphql`
   query GetSinglePost ($slug: String){
     mdx( frontmatter: {slug: {eq: $slug}}) {
       frontmatter {
+        author
+        category
         date
         humanDate: date(formatString: "YYYY MMMM Do")
         image {
